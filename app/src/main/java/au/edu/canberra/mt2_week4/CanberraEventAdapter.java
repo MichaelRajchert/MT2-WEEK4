@@ -34,7 +34,7 @@ public class CanberraEventAdapter extends ArrayAdapter<CanberraEvent> {
         CanberraEvent event = events.get(position);
 
         ImageView icon = (ImageView) convertView.findViewById(R.id.imageViewIcon);
-        icon.setImageResource(R.mipmap.ic_launcher);
+        icon.setImageResource(R.mipmap.ic_neon_night);
 
         TextView title = (TextView) convertView.findViewById(R.id.textViewTitle);
         title.setText(event.getTitle());
