@@ -23,6 +23,14 @@ public class ListViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        events = mydb.getAllEvents();
+        if (events.isEmpty()) {
+            mydb.insertEvent(new CanberraEvent("Neon Night", R.drawable.neon_night, new Date(2017, 3, 3)));
+            mydb.insertEvent(new CanberraEvent("Lights! Canberra! Actions!", R.drawable.lights_canberra_actions, new Date(2017, 3, 10)));
+            mydb.insertEvent(new CanberraEvent("National Portrait Gallery Late Night", R.drawable.national_portrait_gallery, new Date(2017, 3, 3)));
+            events = mydb.getAllEvents();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -36,12 +44,12 @@ public class ListViewActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        //events.add(new CanberraEvent("Neon Night", R.drawable.neon_night, new Date(2017,3,3)));
-        //events.add(new CanberraEvent("Lights! Canberra! Actions!", R.drawable.lights_canberra_actions, new Date(2017,3,10)));
-        //events.add(new CanberraEvent("National Portrait Gallery Late Night", R.drawable.national_portrait_gallery, new Date(2017,3,3)));
 
-        ArrayAdapter<CanberraEvent> adapter = new ArrayAdapter<CanberraEvent>(
-                this, android.R.layout.simple_list_item_1, events);
+        //ArrayAdapter<CanberraEvent> adapter = new ArrayAdapter<CanberraEvent>(
+                //this, android.R.layout.simple_list_item_1, events);
+
+        CanberraEventAdapter adapter = new CanberraEventAdapter(
+                this, R.layout.my_listview_item, events);
 
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
@@ -59,13 +67,7 @@ public class ListViewActivity extends AppCompatActivity {
                     }
                 });
 
-        events = mydb.getAllEvents();
-        if (events.isEmpty()) {
-            mydb.insertEvent(new CanberraEvent("Neon Night", R.drawable.neon_night, new Date(2017, 3, 3)));
-            mydb.insertEvent(new CanberraEvent("Lights! Canberra! Actions!", R.drawable.lights_canberra_actions, new Date(2017, 3, 10)));
-            mydb.insertEvent(new CanberraEvent("National Portrait Gallery Late Night", R.drawable.national_portrait_gallery, new Date(2017, 3, 3)));
-            events = mydb.getAllEvents();
-        }
+
     }
 }
 
